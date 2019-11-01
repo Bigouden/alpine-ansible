@@ -10,6 +10,6 @@ RUN apk add --update --no-cache \
     python3 \
     python3-dev \
     sshpass
-RUN curl https://bootstrap.pypa.io/get-pip.py
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python3 get-pip.py
 RUN pip3 install ansible-lint
