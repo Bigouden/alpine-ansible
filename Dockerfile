@@ -1,5 +1,5 @@
 FROM alpine:3.10
-MAINTAINER Thomas GUIRRIEC
+MAINTAINER Thomas GUIRRIEC <thomas@guirriec.fr>
 RUN apk add --update --no-cache \
       curl \
       gcc \
@@ -13,7 +13,7 @@ RUN apk add --update --no-cache \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
     && python3 get-pip.py \
     && rm get-pip.py \
-    && pip3 --no-cache-dir install ansible-lint \
+    && pip --no-cache-dir install ansible-lint \
     && apk del \
       curl \
       gcc \
@@ -21,4 +21,8 @@ RUN apk add --update --no-cache \
       musl-dev \
       openssl-dev \
       python3-dev \
-    && rm -rf /tmp/*
+    && pip uninstall -y pip \
+    && rm -rf \
+      /tmp/* \
+      /root/.cache/*
+ENTRYPOINT ["/usr/bin/ansible", "--version"]
