@@ -45,7 +45,7 @@ Test Ansible Vault:
     - docker run  --entrypoint "ansible-vault" $CONTAINER_TEST_IMAGE --version
 
 Release Image:
-  stage: Releaase
+  stage: Release
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
