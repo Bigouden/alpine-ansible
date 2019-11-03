@@ -3,8 +3,9 @@ services:
   - docker:dind
 
 stages:
-  - build
-  - release
+  - Build
+  - Test
+  - Release
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
@@ -13,26 +14,38 @@ variables:
 before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-build:
+Build:
   stage: build
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
-      #test1:
-      #  stage: test
-      #  script:
-      #    - docker pull $CONTAINER_TEST_IMAGE
-      #    - docker run $CONTAINER_TEST_IMAGE /script/to/run/tests
-      #
-      #test2:
-      #  stage: test
-      #  script:
-      #    - docker pull $CONTAINER_TEST_IMAGE
-      #    - docker run $CONTAINER_TEST_IMAGE /script/to/run/another/test
-      #
-release-image:
-  stage: release
+Test Ansible:
+  stage: Test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run $CONTAINER_TEST_IMAGE
+
+Test Ansible Lint: 
+  stage: Test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run  --entrypoint "ansible-lint" $CONTAINER_TEST_IMAGE --version
+
+Test Ansible Playbook: 
+  stage: Test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run  --entrypoint "ansible-playbook" $CONTAINER_TEST_IMAGE --version
+
+Test Ansible Vault: 
+  stage: Test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run  --entrypoint "ansible-vault" $CONTAINER_TEST_IMAGE --version
+
+Release Image:
+  stage: Releaase
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
