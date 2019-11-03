@@ -25,4 +25,4 @@ RUN apk add --update --no-cache \
     && rm -rf \
       /tmp/* \
       /root/.cache/*
-ENTRYPOINT ["/usr/bin/ansible", "--version"]
+CMD ["/usr/bin/ansible", "--version"]
