@@ -30,19 +30,19 @@ Test Ansible Lint:
   stage: Test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run  --entrypoint "ansible-lint" $CONTAINER_TEST_IMAGE --version
+    - docker run  $CONTAINER_TEST_IMAGE "ansible-lint --version"
 
 Test Ansible Playbook: 
   stage: Test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run  --entrypoint "ansible-playbook" $CONTAINER_TEST_IMAGE --version
+    - docker run  $CONTAINER_TEST_IMAGE "ansible-playbook --version"
 
 Test Ansible Vault: 
   stage: Test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run  --entrypoint "ansible-vault" $CONTAINER_TEST_IMAGE --version
+    - docker run  $CONTAINER_TEST_IMAGE "ansible-vault --version"
 
 Release Image:
   stage: Release
