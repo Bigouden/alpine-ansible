@@ -27,7 +27,6 @@ Build:
 container_scanning:
   stage: Scan
   
-
 Test Ansible:
   stage: Test
   script:
