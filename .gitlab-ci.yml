@@ -6,6 +6,9 @@ stages:
   - Build
   - Test
   - Release
+  
+include:
+  template: Container-Scanning.gitlab-ci.yml
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
