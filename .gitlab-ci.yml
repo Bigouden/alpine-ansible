@@ -7,7 +7,6 @@ stages:
   - Scan
   - Test
   - Release
-  - container_scanning
   
 include:
   template: Container-Scanning.gitlab-ci.yml
