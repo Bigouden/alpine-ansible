@@ -5,6 +5,7 @@ services:
 stages:
   - Build
   - Test
+  - container_scanning
   - Release
   
 include:
