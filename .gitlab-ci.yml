@@ -4,9 +4,13 @@ services:
 
 stages:
   - Build
+  - Scan
   - Test
   - Release
   - container_scanning
+  
+include:
+  template: Container-Scanning.gitlab-ci.yml
   
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
@@ -15,14 +19,15 @@ variables:
 before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-include:
-  template: Container-Scanning.gitlab-ci.yml
-
 Build:
   stage: Build
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
+    
+container_scanning:
+  stage: Scan
+  
 
 Test Ansible:
   stage: Test
