@@ -4,7 +4,6 @@ services:
 
 stages:
   - Build
-  - Scan
   - Test
   - Release
   
@@ -23,10 +22,7 @@ Build:
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
-    
-container_scanning:
-  stage: Scan
-  
+
 Test Ansible:
   stage: Test
   script:
