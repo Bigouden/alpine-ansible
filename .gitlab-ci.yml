@@ -4,7 +4,6 @@ services:
 
 stages:
   - Build
-  - Test
   - test
   - Release
   
@@ -25,7 +24,7 @@ Build:
     - docker push $CONTAINER_TEST_IMAGE
 
 Test Ansible:
-  stage: Test
+  stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run $CONTAINER_TEST_IMAGE
@@ -33,7 +32,7 @@ Test Ansible:
     GIT_STRATEGY: none
 
 Test Ansible Lint: 
-  stage: Test
+  stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run  $CONTAINER_TEST_IMAGE ansible-lint --version
@@ -41,7 +40,7 @@ Test Ansible Lint:
     GIT_STRATEGY: none
 
 Test Ansible Playbook: 
-  stage: Test
+  stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run  $CONTAINER_TEST_IMAGE ansible-playbook --version
@@ -49,7 +48,7 @@ Test Ansible Playbook:
     GIT_STRATEGY: none
 
 Test Ansible Vault: 
-  stage: Test
+  stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run  $CONTAINER_TEST_IMAGE ansible-vault --version
