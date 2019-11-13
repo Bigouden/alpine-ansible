@@ -16,7 +16,7 @@ Hadolint:
   stage: Quality
   image: hadolint/hadolint:latest-debian
   script:
-    - hadolint Dockerfile
+    - hadolint --ignore DL3013 --ignore DL3018 Dockerfile
 
 Build:
   stage: Build
