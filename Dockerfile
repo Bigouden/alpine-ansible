@@ -1,5 +1,5 @@
 FROM alpine:3.10
-MAINTAINER Thomas GUIRRIEC <thomas@guirriec.fr>
+LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 RUN apk add --update --no-cache \
       curl \
       gcc \
