@@ -12,9 +12,6 @@ variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
-before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
 Hadolint:
   stage: Quality
   image: hadolint/hadolint:latest-debian
@@ -23,12 +20,16 @@ Hadolint:
 
 Build:
   stage: Build
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 Test Ansible:
   stage: Test
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run $CONTAINER_TEST_IMAGE
@@ -37,6 +38,8 @@ Test Ansible:
 
 Test Ansible Lint: 
   stage: Test
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run  $CONTAINER_TEST_IMAGE ansible-lint --version
@@ -45,6 +48,8 @@ Test Ansible Lint:
 
 Test Ansible Playbook: 
   stage: Test
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run  $CONTAINER_TEST_IMAGE ansible-playbook --version
@@ -53,6 +58,8 @@ Test Ansible Playbook:
 
 Test Ansible Vault: 
   stage: Test
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run  $CONTAINER_TEST_IMAGE ansible-vault --version
@@ -61,6 +68,8 @@ Test Ansible Vault:
 
 Release Image:
   stage: Release
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
