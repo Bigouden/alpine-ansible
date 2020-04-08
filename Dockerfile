@@ -11,6 +11,7 @@ RUN apk add --update --no-cache \
       python3 \
       python3-dev \
       sshpass \
+      rsync \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
     && python3 get-pip.py \
     && rm get-pip.py \
