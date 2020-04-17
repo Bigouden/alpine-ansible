@@ -82,6 +82,8 @@ Release Version Image:
     - docker push $DOCKER_HUB_VERSION_IMAGE
   variables:
     GIT_STRATEGY: none
+  except:
+    - master
 
 Release Latest Image:
   stage: Release
@@ -89,10 +91,10 @@ Release Latest Image:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
   script:
-    - docker pull $CONTAINER_VERSION_IMAGE
-    - docker tag $CONTAINER_VERSION_IMAGE $CONTAINER_LATEST_IMAGE
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_LATEST_IMAGE
     - docker push $CONTAINER_LATEST_IMAGE
-    - docker tag $CONTAINER_VERSION_IMAGE $DOCKER_HUB_LATEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_LATEST_IMAGE
     - docker push $DOCKER_HUB_LATEST_IMAGE
   variables:
     GIT_STRATEGY: none
