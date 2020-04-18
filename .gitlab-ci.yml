@@ -54,6 +54,8 @@ Test Ansible Lint:
     - docker run  $CONTAINER_TEST_IMAGE ansible-lint --version
   variables:
     GIT_STRATEGY: none
+  except:
+    - master
 
 Test Ansible Playbook: 
   stage: Test
