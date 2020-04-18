@@ -90,3 +90,4 @@ Release:
     - docker push $DOCKER_HUB_LATEST_IMAGE
   variables:
     GIT_STRATEGY: none
+  when: manual
