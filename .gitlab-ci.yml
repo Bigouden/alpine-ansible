@@ -81,7 +81,7 @@ Test Ansible Vault:
   except:
     - master
 
-Release Version:
+Release:
   stage: Release
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -90,25 +90,13 @@ Release Version:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_VERSION_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_VERSION_IMAGE
-    - docker push $CONTAINER_VERSION_IMAGE
-    - docker push $DOCKER_HUB_VERSION_IMAGE
-  variables:
-    GIT_STRATEGY: none
-  except:
-    - master
-
-Release Latest:
-  stage: Release
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_LATEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_LATEST_IMAGE
+    - docker push $CONTAINER_VERSION_IMAGE
+    - docker push $DOCKER_HUB_VERSION_IMAGE
     - docker push $CONTAINER_LATEST_IMAGE
     - docker push $DOCKER_HUB_LATEST_IMAGE
   variables:
     GIT_STRATEGY: none
-  only:
+  except:
     - master
