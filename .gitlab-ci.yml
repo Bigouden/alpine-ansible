@@ -1,8 +1,6 @@
 workflow:
   rules:
-    - if: $CI_COMMIT_BRANCH != "master"
-    - changes:
-        - Dockerfile
+    - if: $CI_MERGE_REQUEST_ID
 
 image: docker:latest
 services:
@@ -85,7 +83,7 @@ Release:
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_VERSION_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_VERSION_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_LATEST_IMAGE
-    - docker tag $CONTAINER_TESTN_IMAGE $DOCKER_HUB_LATEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_LATEST_IMAGE
     - docker push $CONTAINER_VERSION_IMAGE
     - docker push $DOCKER_HUB_VERSION_IMAGE
     - docker push $CONTAINER_LATEST_IMAGE
