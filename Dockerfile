@@ -1,5 +1,6 @@
 FROM alpine:3.11
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
+ARG ANSIBLE_VERSION
 RUN apk add --update --no-cache \
       curl \
       gcc \
@@ -16,6 +17,7 @@ RUN apk add --update --no-cache \
     && python3 get-pip.py \
     && rm get-pip.py \
     && pip --no-cache-dir install \
+         ansible==$ANSIBLE_VERSION \
          ansible-lint \
          bcrypt \
          passlib \
