@@ -86,6 +86,8 @@ Release Image:
     - docker push $DOCKER_HUB_LATEST_IMAGE
   variables:
     GIT_STRATEGY: none
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
   only:
     - merge_requests
     - master
