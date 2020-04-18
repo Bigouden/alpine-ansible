@@ -10,6 +10,7 @@ stages:
   
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:test
+  CONTAINER_CURRENT_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   CONTAINER_VERSION_IMAGE: $CI_REGISTRY_IMAGE:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
   CONTAINER_LATEST_IMAGE: $CI_REGISTRY_IMAGE:latest
   DOCKER_HUB_VERSION_IMAGE: dnum/ansible:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
@@ -87,14 +88,14 @@ Test Ansible Vault:
     - master
     - merge_requests
     
-Release Internal:
+Release Current:
   stage: Release
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_CURRENT_IMAGE
+    - docker push $CONTAINER_CURRENT_IMAGE
   except:
     - master
     - merge_requests
@@ -109,7 +110,6 @@ Release:
     - docker tag $CONTAINER_VERSION_IMAGE $DOCKER_HUB_VERSION_IMAGE
     - docker tag $CONTAINER_VERSION_IMAGE $CONTAINER_LATEST_IMAGE
     - docker tag $CONTAINER_VERSION_IMAGE $DOCKER_HUB_LATEST_IMAGE
-    - docker push $CONTAINER_VERSION_IMAGE
     - docker push $DOCKER_HUB_VERSION_IMAGE
     - docker push $CONTAINER_LATEST_IMAGE
     - docker push $DOCKER_HUB_LATEST_IMAGE
