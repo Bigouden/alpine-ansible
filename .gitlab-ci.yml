@@ -1,3 +1,8 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH != "master"
+    - changes
+
 image: docker:latest
 services:
   - docker:dind
@@ -21,9 +26,6 @@ Hadolint:
   image: hadolint/hadolint:latest-debian
   script:
     - hadolint --ignore DL3013 --ignore DL3018 Dockerfile
-  except:
-    - master
-    - merge_requests
 
 Build:
   stage: Build
@@ -32,9 +34,6 @@ Build:
   script:
     - docker build --pull --build-arg ANSIBLE_VERSION=$CI_COMMIT_REF_NAME -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
-  except:
-    - master
-    - merge_requests
 
 Test Ansible:
   stage: Test
@@ -45,9 +44,7 @@ Test Ansible:
     - docker run $CONTAINER_TEST_IMAGE
   variables:
     GIT_STRATEGY: none
-  except:
-    - master
-    - merge_requests
+
 
 Test Ansible Lint: 
   stage: Test
@@ -58,9 +55,6 @@ Test Ansible Lint:
     - docker run  $CONTAINER_TEST_IMAGE ansible-lint --version
   variables:
     GIT_STRATEGY: none
-  except:
-    - master
-    - merge_requests
 
 Test Ansible Playbook: 
   stage: Test
@@ -71,9 +65,6 @@ Test Ansible Playbook:
     - docker run  $CONTAINER_TEST_IMAGE ansible-playbook --version
   variables:
     GIT_STRATEGY: none
-  except:
-    - master
-    - merge_requests
 
 Test Ansible Vault: 
   stage: Test
@@ -84,10 +75,7 @@ Test Ansible Vault:
     - docker run  $CONTAINER_TEST_IMAGE ansible-vault --version
   variables:
     GIT_STRATEGY: none
-  except:
-    - master
-    - merge_requests
-    
+
 Release Current:
   stage: Release
   before_script:
@@ -96,9 +84,6 @@ Release Current:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_CURRENT_IMAGE
     - docker push $CONTAINER_CURRENT_IMAGE
-  except:
-    - master
-    - merge_requests
 
 Release:
   stage: Release
@@ -115,5 +100,3 @@ Release:
     - docker push $DOCKER_HUB_LATEST_IMAGE
   variables:
     GIT_STRATEGY: none
-  only:
-    - merge_requests
