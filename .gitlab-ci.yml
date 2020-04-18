@@ -88,5 +88,4 @@ Release Image:
     GIT_STRATEGY: none
   rules:
     - if: $CI_MERGE_REQUEST_ID     
-  only:
-    - master
+    - if: $CI_COMMIT_BRANCH == 'master'
