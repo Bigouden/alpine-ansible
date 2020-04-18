@@ -10,9 +10,9 @@ stages:
   
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:test
-  CONTAINER_VERSION_IMAGE: $CI_REGISTRY_IMAGE:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+  CONTAINER_VERSION_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   CONTAINER_LATEST_IMAGE: $CI_REGISTRY_IMAGE:latest
-  DOCKER_HUB_VERSION_IMAGE: dnum/ansible:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+  DOCKER_HUB_VERSION_IMAGE: dnum/ansible:$CI_COMMIT_REF_NAME
   DOCKER_HUB_LATEST_IMAGE: dnum/ansible:latest
 
 Hadolint:
@@ -20,6 +20,8 @@ Hadolint:
   image: hadolint/hadolint:latest-debian
   script:
     - hadolint --ignore DL3013 --ignore DL3018 Dockerfile
+  except:
+    - master
 
 Build:
   stage: Build
@@ -28,6 +30,8 @@ Build:
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
+  except:
+    - master
 
 Test Ansible:
   stage: Test
@@ -38,6 +42,8 @@ Test Ansible:
     - docker run $CONTAINER_TEST_IMAGE
   variables:
     GIT_STRATEGY: none
+  except:
+    - master
 
 Test Ansible Lint: 
   stage: Test
@@ -58,6 +64,8 @@ Test Ansible Playbook:
     - docker run  $CONTAINER_TEST_IMAGE ansible-playbook --version
   variables:
     GIT_STRATEGY: none
+  except:
+    - master
 
 Test Ansible Vault: 
   stage: Test
@@ -68,6 +76,8 @@ Test Ansible Vault:
     - docker run  $CONTAINER_TEST_IMAGE ansible-vault --version
   variables:
     GIT_STRATEGY: none
+  except:
+    - master
 
 Release Image:
   stage: Release
@@ -87,7 +97,4 @@ Release Image:
   variables:
     GIT_STRATEGY: none
   only:
-    refs:
-      - master
-    variables:
-      - $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+    - master
