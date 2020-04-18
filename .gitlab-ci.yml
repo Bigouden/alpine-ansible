@@ -87,7 +87,7 @@ Test Ansible Vault:
     - master
     - merge_requests
     
-Release:
+Release Internal:
   stage: Release
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
