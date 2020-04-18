@@ -87,7 +87,6 @@ Release Image:
   variables:
     GIT_STRATEGY: none
   rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
+    - if: $CI_MERGE_REQUEST_ID     
   only:
-    - merge_requests
     - master
