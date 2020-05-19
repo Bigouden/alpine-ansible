@@ -10,6 +10,11 @@ stages:
   - Test
   - Release
 
+variables:
+  DOCKER_HUB_VERSION_IMAGE: dnum/ansible:$CI_COMMIT_REF_NAME
+  DOCKER_HUB_LATEST_IMAGE: dnum/ansible:latest
+
+
 Test Ansible:
   stage: Test
   before_script:
