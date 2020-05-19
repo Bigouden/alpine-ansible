@@ -10,27 +10,6 @@ stages:
   - Test
   - Release
 
-variables:
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:test
-  CONTAINER_VERSION_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  CONTAINER_LATEST_IMAGE: $CI_REGISTRY_IMAGE:latest
-  DOCKER_HUB_VERSION_IMAGE: dnum/ansible:$CI_COMMIT_REF_NAME
-  DOCKER_HUB_LATEST_IMAGE: dnum/ansible:latest
-
-Hadolint:
-  stage: Quality
-  image: hadolint/hadolint:latest-debian
-  script:
-    - hadolint --ignore DL3013 --ignore DL3018 Dockerfile
-
-Build:
-  stage: Build
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker build --pull -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
-
 Test Ansible:
   stage: Test
   before_script:
