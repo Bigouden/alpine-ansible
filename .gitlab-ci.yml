@@ -1,17 +1,15 @@
-workflow:
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-
-image: docker:latest
-services:
-  - docker:dind
-
+include:
+  - project: 'Bigouden/gitlab-ci-templates'
+    file: '.gitlab-ci-docker.yml'
+    
 stages:
   - Quality
   - Build
+  - Inspect
+  - Security
   - Test
   - Release
-  
+
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:test
   CONTAINER_VERSION_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
