@@ -5,15 +5,9 @@ include:
 stages:
   - Quality
   - Build
-  - Inspect
-  - Security
   - Test
+  - Inspect
   - Release
-
-variables:
-  DOCKER_HUB_VERSION_IMAGE: dnum/ansible:$CI_COMMIT_REF_NAME
-  DOCKER_HUB_LATEST_IMAGE: dnum/ansible:latest
-
 
 Test Ansible:
   stage: Test
@@ -55,21 +49,21 @@ Test Ansible Vault:
   variables:
     GIT_STRATEGY: none
 
-Release:
+DockerHub (Enterprise):
   stage: Release
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+    - docker login -u $DOCKER_HUB_ENTERPRISE_USER -p $DOCKER_HUB_ENTERPRISE_PASSWORD
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_VERSION_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_VERSION_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_LATEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_LATEST_IMAGE
-    - docker push $CONTAINER_VERSION_IMAGE
     - docker push $DOCKER_HUB_VERSION_IMAGE
-    - docker push $CONTAINER_LATEST_IMAGE
     - docker push $DOCKER_HUB_LATEST_IMAGE
   variables:
+    DOCKER_HUB_VERSION_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:$CI_COMMIT_REF_NAME
+    DOCKER_HUB_LATEST_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:latest
     GIT_STRATEGY: none
-  when: manual
+  rules:
+    - if: $DOCKER_HUB_ENTERPRISE_USER && $DOCKER_HUB_ENTERPRISE_PASSWORD
+      when: manual
