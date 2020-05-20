@@ -49,7 +49,7 @@ Test Ansible Vault:
   variables:
     GIT_STRATEGY: none
 
-DockerHub (Enterprise):
+DockerHub (PRO):
   stage: Release
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
