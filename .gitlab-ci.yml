@@ -65,5 +65,5 @@ DockerHub (Enterprise):
     DOCKER_HUB_LATEST_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:latest
     GIT_STRATEGY: none
   rules:
-    if: $DOCKER_HUB_ENTERPRISE_USER && $DOCKER_HUB_ENTERPRISE_PASSWORD
-    when: manual
+    - if: $DOCKER_HUB_ENTERPRISE_USER && $DOCKER_HUB_ENTERPRISE_PASSWORD
+      when: manual
