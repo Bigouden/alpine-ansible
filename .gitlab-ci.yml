@@ -9,8 +9,6 @@ stages:
   - Inspect
   - Release
 
-
-
 Test Ansible:
   stage: Test
   before_script:
