@@ -30,7 +30,7 @@ RUN apk add --update --no-cache \
        python3-dev \
     && pip uninstall -y pip \
     && rm -rf \
-        /lib/apk/db/*\
+        /lib/apk/db/* \
         /tmp/* \
         /root/.cache \
         /var/cache/*
@@ -38,4 +38,5 @@ RUN apk add --update --no-cache \
     && adduser -u 1000 -D -h /etc/ansible -s /bin/sh -G ansible ansible
 USER ansible
 WORKDIR /etc/ansible
+HEALTHCHECK CMD ansible --version
 CMD ["/usr/bin/ansible", "--version"]
