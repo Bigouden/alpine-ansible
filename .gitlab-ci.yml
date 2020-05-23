@@ -9,7 +9,7 @@ stages:
   - Inspect
   - Release
 
-Test Ansible:
+Ansible:
   stage: Test
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -19,7 +19,7 @@ Test Ansible:
   variables:
     GIT_STRATEGY: none
 
-Test Ansible Lint: 
+Ansible Lint: 
   stage: Test
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -29,7 +29,7 @@ Test Ansible Lint:
   variables:
     GIT_STRATEGY: none
 
-Test Ansible Playbook: 
+Ansible Playbook: 
   stage: Test
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -39,7 +39,7 @@ Test Ansible Playbook:
   variables:
     GIT_STRATEGY: none
 
-Test Ansible Vault: 
+Ansible Vault: 
   stage: Test
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
