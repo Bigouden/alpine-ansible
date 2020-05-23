@@ -30,8 +30,10 @@ RUN apk add --update --no-cache \
        python3-dev \
     && pip uninstall -y pip \
     && rm -rf \
+        /lib/apk/db/*\
         /tmp/* \
-        /root/.cache/* \
+        /root/.cache \
+        /var/cache/*
     && addgroup -g 1000 ansible \
     && adduser -u 1000 -D -h /etc/ansible -s /bin/sh -G ansible ansible
 USER ansible
