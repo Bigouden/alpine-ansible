@@ -38,5 +38,5 @@ RUN apk add --update --no-cache \
     && adduser -u 1000 -D -h /etc/ansible -s /bin/sh -G ansible ansible
 USER ansible
 WORKDIR /etc/ansible
-HEALTHCHECK CMD ansible --version
+HEALTHCHECK CMD ansible --version || exit 1
 CMD ["/usr/bin/ansible", "--version"]
