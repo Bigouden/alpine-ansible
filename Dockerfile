@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/bigouden/alpine-base:3.11.6
+FROM alpine:3.11
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ARG ANSIBLE_VERSION=2.9.9
 RUN apk add --no-cache --update --virtual \
