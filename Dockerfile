@@ -1,18 +1,20 @@
 FROM registry.gitlab.com/bigouden/alpine-base:3.11.6
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ARG ANSIBLE_VERSION=2.9.9
-RUN apk add --update --no-cache \
-      curl \
-      gcc \
-      git \
-      libffi-dev \
-      musl-dev \
-      openssh \
-      openssl-dev \
-      python3 \
-      python3-dev \
-      sshpass \
-      rsync \
+RUN apk add --no-cache --update --virtual \
+      build-dependencies \
+        curl \
+        gcc \
+        libffi-dev \
+        musl-dev \
+        openssl-dev \
+        python3-dev \
+    && apk add --no-cache --update \
+         git \
+         openssh \
+         python3 \
+         sshpass \
+         rsync \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
     && python3 get-pip.py \
     && rm get-pip.py \
@@ -21,13 +23,7 @@ RUN apk add --update --no-cache \
          ansible-lint \
          bcrypt \
          passlib \
-    && apk del \
-       curl \
-       gcc \
-       libffi-dev \
-       musl-dev \
-       openssl-dev \
-       python3-dev \
+    && apk del build-dependencies \
     && pip uninstall -y pip \
     && rm -rf \
         /lib/apk/db/* \
