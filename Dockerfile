@@ -1,6 +1,6 @@
 FROM alpine:3.12
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
-ARG ANSIBLE_VERSION=2.9.9
+ARG ANSIBLE_VERSION=2.9.11
 RUN apk add --no-cache --update --virtual \
       build-dependencies \
         curl \
