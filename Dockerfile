@@ -9,6 +9,7 @@ RUN apk add --no-cache --update --virtual \
         musl-dev \
         openssl-dev \
         python3-dev \
+        py3-setuptools \
     && apk add --no-cache --update \
          git \
          openssh \
