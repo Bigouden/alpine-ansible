@@ -13,6 +13,7 @@ RUN apk add --no-cache --update --virtual \
     && apk add --no-cache --update \
          git \
          openssh \
+         py3-cryptography \
          python3 \
          sshpass \
          rsync \
