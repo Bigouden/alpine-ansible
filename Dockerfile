@@ -2,7 +2,7 @@ FROM alpine:3.12
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ARG ANSIBLE_VERSION=2.10.2
 ENV ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections
-ADD requirements.txt /
+COPY requirements.txt /
 RUN apk add --no-cache --update --virtual \
       build-dependencies \
         curl \
