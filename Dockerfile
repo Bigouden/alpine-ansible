@@ -25,9 +25,9 @@ RUN apk add --no-cache --update --virtual \
          ansible-base==$ANSIBLE_VERSION \
          ansible-lint \
          bcrypt \
-         packaging \
          passlib \
     && apk del build-dependencies \
+    && pip --no-cache-dir install packaging \
     && pip uninstall -y pip \
     && rm -rf \
         /root/.cache \
