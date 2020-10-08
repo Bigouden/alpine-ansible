@@ -1,6 +1,7 @@
 FROM alpine:3.12
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
-ARG ANSIBLE_VERSION=2.10.0
+ARG ANSIBLE_VERSION=2.10.2
+ENV ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections
 RUN apk add --no-cache --update --virtual \
       build-dependencies \
         curl \
@@ -21,9 +22,10 @@ RUN apk add --no-cache --update --virtual \
     && python3 get-pip.py \
     && rm get-pip.py \
     && pip --no-cache-dir install \
-         ansible==$ANSIBLE_VERSION \
+         ansible-base==$ANSIBLE_VERSION \
          ansible-lint \
          bcrypt \
+         packaging \
          passlib \
     && apk del build-dependencies \
     && pip uninstall -y pip \
