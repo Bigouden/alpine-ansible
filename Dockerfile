@@ -11,7 +11,6 @@ RUN apk add --no-cache --update --virtual \
         musl-dev \
         openssl-dev \
         python3-dev \
-        py3-setuptools \
     && apk add --no-cache --update \
          git \
          openssh \
@@ -22,13 +21,12 @@ RUN apk add --no-cache --update --virtual \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
     && python3 get-pip.py \
     && rm get-pip.py \
-    && pip install --no-cache-dir --no-dependencies -r requirements.txt \
-    && pip install --no-cache-dir --no-dependencies \
+    && pip install --no-cache-dir --no-dependencies --no-binary :all: -r requirements.txt \
+    && pip install --no-cache-dir --no-dependencies --no-binary :all: \
          ansible-base==$ANSIBLE_VERSION \
          ansible-lint \
     && apk del build-dependencies \
-    && pip --no-cache-dir install packaging \
-    && pip uninstall -y pip \
+    && pip uninstall -y setuptools pip \
     && rm -rf \
         /root/.cache \
         /tmp/* \
