@@ -9,9 +9,6 @@ stages:
   - Inspect
   - Release
 
-variables:
-  GIT_STRATEGY: none
-
 default:
   image: $CONTAINER_TEST_IMAGE
 
@@ -19,21 +16,29 @@ Ansible:
   stage: Test
   script:
     - ansible --version
+  variables:
+    GIT_STRATEGY: none
 
 Ansible Lint: 
   stage: Test
   script:
     - ansible-lint --version
+  variables:
+    GIT_STRATEGY: none
 
 Ansible Playbook: 
   stage: Test
   script:
     - ansible-playbook --version
+  variables:
+    GIT_STRATEGY: none
 
 Ansible Vault: 
   stage: Test
   script:
     - ansible-vault --version
+  variables:
+    GIT_STRATEGY: none
 
 DockerHub (PRO):
   stage: Release
@@ -50,6 +55,8 @@ DockerHub (PRO):
     DOCKER_HUB_LATEST_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:latest
   inherit:
     default: false
+  variables:
+    GIT_STRATEGY: none
   rules:
     - if: $DOCKER_HUB_ENTERPRISE_USER && $DOCKER_HUB_ENTERPRISE_PASSWORD
       when: manual
