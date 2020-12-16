@@ -9,50 +9,34 @@ stages:
   - Inspect
   - Release
 
+variables:
+  GIT_STRATEGY: none
+
+default:
+  image: $CONTAINER_TEST_IMAGE
+
 Ansible:
   stage: Test
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run $CONTAINER_TEST_IMAGE
-  variables:
-    GIT_STRATEGY: none
+    - ansible --version
 
 Ansible Lint: 
   stage: Test
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run  $CONTAINER_TEST_IMAGE ansible-lint --version
-  variables:
-    GIT_STRATEGY: none
+    - ansible-lint --version
 
 Ansible Playbook: 
   stage: Test
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run  $CONTAINER_TEST_IMAGE ansible-playbook --version
-  variables:
-    GIT_STRATEGY: none
+    - ansible-playbook --version
 
 Ansible Vault: 
   stage: Test
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run  $CONTAINER_TEST_IMAGE ansible-vault --version
-  variables:
-    GIT_STRATEGY: none
+    - ansible-vault --version
 
 DockerHub (PRO):
   stage: Release
   before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker login -u $DOCKER_HUB_ENTERPRISE_USER -p $DOCKER_HUB_ENTERPRISE_PASSWORD
   script:
     - docker pull $CONTAINER_TEST_IMAGE
@@ -63,7 +47,8 @@ DockerHub (PRO):
   variables:
     DOCKER_HUB_VERSION_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:$CI_COMMIT_REF_NAME
     DOCKER_HUB_LATEST_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:latest
-    GIT_STRATEGY: none
+  inherit:
+    default: false
   rules:
     - if: $DOCKER_HUB_ENTERPRISE_USER && $DOCKER_HUB_ENTERPRISE_PASSWORD
       when: manual
