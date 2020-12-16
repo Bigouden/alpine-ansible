@@ -1,6 +1,7 @@
 FROM alpine:3.12
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ARG ANSIBLE_VERSION=2.10.4
+ARG ANSIBLE_LINT_VERSION=4.3.7
 ENV ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections
 COPY requirements.txt /
 RUN apk add --no-cache --update --virtual \
@@ -24,9 +25,9 @@ RUN apk add --no-cache --update --virtual \
     && pip install --no-cache-dir --no-dependencies --no-binary :all: -r requirements.txt \
     && pip install --no-cache-dir --no-dependencies --no-binary :all: \
          ansible-base==$ANSIBLE_VERSION \
-         ansible-lint \
+         ansible-lint==$ANSIBLE_LINT_VERSION \
     && apk del build-dependencies \
-    && pip uninstall -y setuptools pip \
+    && pip uninstall -y pip \
     && rm -rf \
         /root/.cache \
         /tmp/* \
