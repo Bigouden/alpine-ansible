@@ -32,8 +32,8 @@ RUN apk add --no-cache --update --virtual \
         /root/.cache \
         /tmp/* \
         /var/cache/* \
-    && ansible-galaxy collection install -p /usr/share/ansible/collections community.general \
-    && ansible-galaxy collection install -p /usr/share/ansible/collections ansible.posix \
+    && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH ansible.posix \
+    && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH community.general \
     && addgroup -g 1000 ansible \
     && adduser -u 1000 -D -h /etc/ansible -s /bin/sh -G ansible ansible
 USER ansible
