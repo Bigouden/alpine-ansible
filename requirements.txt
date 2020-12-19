@@ -6,6 +6,7 @@ cryptography
 jinja2
 MarkupSafe>=0.23
 packaging
+passlib
 pycparser
 pygments>=2.6.0,<3.0.0
 pyparsing>=2.0.2
