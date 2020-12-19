@@ -7,6 +7,7 @@ stages:
   - Build
   - Commands
   - Collections
+  - Python Modules
   - Inspect
   - Release
 
@@ -82,6 +83,16 @@ Cloud:
     - ansible-galaxy collection list | grep google.cloud
   variables:
     GIT_STRATEGY: none
+
+Bcrypt:
+  stage: Python Modules
+  script:
+    - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('bcrypt') else 1)"
+
+Passlib:
+  stage: Python Modules
+  script:
+    - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('passlib') else 1)"
 
 DockerHub (PRO):
   stage: Release
