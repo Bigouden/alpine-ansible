@@ -5,7 +5,8 @@ include:
 stages:
   - Quality
   - Build
-  - Test
+  - Commands
+  - Collections
   - Inspect
   - Release
 
@@ -13,30 +14,72 @@ default:
   image: $CONTAINER_TEST_IMAGE
 
 Ansible:
-  stage: Test
+  stage: Commands
   script:
     - ansible --version
   variables:
     GIT_STRATEGY: none
 
+Ansible Galaxy: 
+  stage: Commands
+  script:
+    - ansible-galaxy --version
+  variables:
+    GIT_STRATEGY: none
+
 Ansible Lint: 
-  stage: Test
+  stage: Commands
   script:
     - ansible-lint --version
   variables:
     GIT_STRATEGY: none
 
 Ansible Playbook: 
-  stage: Test
+  stage: Commands
   script:
     - ansible-playbook --version
   variables:
     GIT_STRATEGY: none
 
 Ansible Vault: 
-  stage: Test
+  stage: Commands
   script:
     - ansible-vault --version
+  variables:
+    GIT_STRATEGY: none
+
+Netcommon: 
+  stage: Collections
+  script:
+    - ansible-galaxy collection list | grep ansible.netcommon
+  variables:
+    GIT_STRATEGY: none
+
+Posix: 
+  stage: Collections
+  script:
+    - ansible-galaxy collection list | grep ansible.posix
+  variables:
+    GIT_STRATEGY: none
+
+General: 
+  stage: Collections
+  script:
+    - ansible-galaxy collection list | grep community.general
+  variables:
+    GIT_STRATEGY: none
+
+Kubernetes: 
+  stage: Collections
+  script:
+    - ansible-galaxy collection list | grep community.kubernetes
+  variables:
+    GIT_STRATEGY: none
+
+Cloud: 
+  stage: Collections
+  script:
+    - ansible-galaxy collection list | grep google.cloud
   variables:
     GIT_STRATEGY: none
 
