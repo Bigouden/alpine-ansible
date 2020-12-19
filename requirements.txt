@@ -1,3 +1,4 @@
+bcrypt
 colorama>=0.4.0,<0.5.0
 commonmark>=0.9.0,<0.10.0
 cffi>=1.12
@@ -5,6 +6,7 @@ cryptography
 jinja2
 MarkupSafe>=0.23
 packaging
+passlib
 pycparser
 pygments>=2.6.0,<3.0.0
 pyparsing>=2.0.2
