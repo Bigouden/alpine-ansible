@@ -6,7 +6,6 @@ ENV ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections
 COPY requirements.txt /
 RUN apk add --no-cache --update --virtual \
       build-dependencies \
-        curl \
         gcc \
         libffi-dev \
         musl-dev \
@@ -14,12 +13,11 @@ RUN apk add --no-cache --update --virtual \
         python3-dev \
     && apk add --no-cache --update \
          git \
-         openssh \
-         py3-cryptography \
+         openssh-client \
          python3 \
          sshpass \
          rsync \
-    && curl -O https://bootstrap.pypa.io/get-pip.py \
+    && wget -O get-pip.py https://bootstrap.pypa.io/get-pip.py \
     && python3 get-pip.py \
     && rm get-pip.py \
     && pip install --no-cache-dir --no-dependencies --no-binary :all: -r requirements.txt \
@@ -27,8 +25,9 @@ RUN apk add --no-cache --update --virtual \
          ansible-base==$ANSIBLE_VERSION \
          ansible-lint==$ANSIBLE_LINT_VERSION \
     && apk del build-dependencies \
-    && pip uninstall -y pip \
+    && pip uninstall -y wheel pip \
     && rm -rf \
+        /root/.ansible \
         /root/.cache \
         /tmp/* \
         /var/cache/* \
