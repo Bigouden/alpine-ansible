@@ -1,6 +1,6 @@
 FROM alpine:3.12
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
-ARG ANSIBLE_VERSION=2.10.4
+ARG ANSIBLE_VERSION=2.10.5
 ARG ANSIBLE_LINT_VERSION=4.3.7
 ENV ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections
 COPY requirements.txt /
@@ -11,6 +11,7 @@ RUN apk add --no-cache --update --virtual \
         musl-dev \
         openssl-dev \
         python3-dev \
+        wget \
     && apk add --no-cache --update \
          git \
          openssh-client \
