@@ -36,6 +36,9 @@ RUN apk add --no-cache --update --virtual \
     && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH ansible.posix \
     && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH community.crypto \
     && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH community.general \
+    && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH ansible.netcommon \
+    && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH community.kubernetes \
+    && ansible-galaxy collection install -p $ANSIBLE_COLLECTIONS_PATH google.cloud \
     && addgroup -g 1000 ansible \
     && adduser -u 1000 -D -h /etc/ansible -s /bin/sh -G ansible ansible
 USER ansible
