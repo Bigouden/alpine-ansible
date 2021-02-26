@@ -2,6 +2,7 @@ FROM alpine:3.12
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ARG ANSIBLE_VERSION=2.10.6
 ARG ANSIBLE_LINT_VERSION=5.0.2
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 ENV ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections
 COPY requirements.txt /
 RUN apk add --no-cache --update --virtual \
