@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ARG ANSIBLE_VERSION=2.10.6
 ARG ANSIBLE_LINT_VERSION=5.0.2
