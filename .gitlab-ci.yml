@@ -27,6 +27,7 @@ Ansible:
 
 Ansible Galaxy: 
   stage: Commands
+  extends: .standalone
   script:
     - ansible-galaxy --version
 
