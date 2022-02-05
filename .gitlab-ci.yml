@@ -49,6 +49,12 @@ Ansible Vault:
   variables:
     GIT_STRATEGY: none
 
+Git CLI:
+  stage: Commands
+  extends: .standalone
+  script:
+    - git version
+
 Netcommon: 
   stage: Collections
   script:
@@ -91,34 +97,37 @@ Cloud:
   variables:
     GIT_STRATEGY: none
 
+Docker: 
+  stage: Collections
+  extends: .standalone
+  script:
+    - ansible-galaxy collection list | grep community.docker
+
+Postgresql: 
+  stage: Collections
+  extends: .standalone
+  script:
+    - ansible-galaxy collection list | grep community.postgresql
+
+Mongodb: 
+  stage: Collections
+  extends: .standalone
+  script:
+    - ansible-galaxy collection list | grep community.mongodb
+
 Bcrypt:
   stage: Python Modules
+  extends: .standalone
   script:
     - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('bcrypt') else 1)"
+
+Git:
+  stage: Python Modules
+  extends: .standalone
+  script:
+    - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('git') else 1)"
 
 Passlib:
   stage: Python Modules
   script:
     - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('passlib') else 1)"
-
-DockerHub (PRO):
-  stage: Release
-  image: docker:latest
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker login -u $DOCKER_HUB_ENTERPRISE_USER -p $DOCKER_HUB_ENTERPRISE_PASSWORD
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_VERSION_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $DOCKER_HUB_LATEST_IMAGE
-    - docker push $DOCKER_HUB_VERSION_IMAGE
-    - docker push $DOCKER_HUB_LATEST_IMAGE
-  inherit:
-    default: false
-  variables:
-    DOCKER_HUB_VERSION_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:$CI_COMMIT_REF_NAME
-    DOCKER_HUB_LATEST_IMAGE: $DOCKER_HUB_ENTERPRISE_USER/ansible:latest
-    GIT_STRATEGY: none
-  rules:
-    - if: $DOCKER_HUB_ENTERPRISE_USER && $DOCKER_HUB_ENTERPRISE_PASSWORD
-      when: manual
