@@ -1,0 +1,10 @@
+ansible.netcommon
+ansible.posix
+community.crypto
+community.docker
+community.general
+community.kubernetes
+community.mongodb
+community.postgresql
+google.cloud
+openstack.cloud
