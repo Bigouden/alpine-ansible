@@ -1,6 +1,14 @@
 include:
   - project: 'Bigouden/gitlab-ci-templates'
     file: '.gitlab-ci-docker.yml'
+
+.standalone:
+  image:
+    name: $CONTAINER_TEST_IMAGE
+    entrypoint: [""]
+  variables:
+    GIT_STRATEGY: none
+  dependencies: []  
     
 stages:
   - Quality
