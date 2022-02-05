@@ -7,14 +7,9 @@ COPY ansible_collections /
 RUN xargs -a /apk_packages apk add --no-cache --update \
     && pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r pip_packages \
-    && mkdir /var/log/ansible \
     && xargs -a /ansible_collections ansible-galaxy collection install -p /usr/share/ansible/collections \
     && addgroup -g 1000 ansible \
     && adduser -u 1000 -D -h /etc/ansible -s /bin/sh -G ansible ansible \
-    && chown ansible:ansible -R /var/log/ansible \
-    && chmod +x /entrypoint.py \
-    && update-ca-certificates \
-    && git config --system http.sslCAInfo /usr/local/share/ca-certificates/internal.crt \
     && pip uninstall -y pip \
     && rm -rf \
          /root/.ansible \
