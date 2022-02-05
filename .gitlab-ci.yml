@@ -19,43 +19,34 @@ stages:
   - Inspect
   - Release
 
-default:
-  image: $CONTAINER_TEST_IMAGE
-
 Ansible:
   stage: Commands
+  extends: .standalone
   script:
     - ansible --version
-  variables:
-    GIT_STRATEGY: none
 
 Ansible Galaxy: 
   stage: Commands
   script:
     - ansible-galaxy --version
-  variables:
-    GIT_STRATEGY: none
 
 Ansible Lint: 
   stage: Commands
+  extends: .standalone
   script:
     - ansible-lint --version
-  variables:
-    GIT_STRATEGY: none
 
 Ansible Playbook: 
   stage: Commands
+  extends: .standalone
   script:
     - ansible-playbook --version
-  variables:
-    GIT_STRATEGY: none
 
 Ansible Vault: 
   stage: Commands
+  extends: .standalone
   script:
     - ansible-vault --version
-  variables:
-    GIT_STRATEGY: none
 
 Git CLI:
   stage: Commands
@@ -65,45 +56,39 @@ Git CLI:
 
 Netcommon: 
   stage: Collections
+  extends: .standalone
   script:
     - ansible-galaxy collection list | grep ansible.netcommon
-  variables:
-    GIT_STRATEGY: none
 
 Posix: 
   stage: Collections
+  extends: .standalone
   script:
     - ansible-galaxy collection list | grep ansible.posix
-  variables:
-    GIT_STRATEGY: none
 
 Crypto: 
   stage: Collections
+  extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.crypto
-  variables:
-    GIT_STRATEGY: none
 
 General: 
   stage: Collections
+  extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.general
-  variables:
-    GIT_STRATEGY: none
 
 Kubernetes: 
   stage: Collections
+  extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.kubernetes
-  variables:
-    GIT_STRATEGY: none
 
 Cloud: 
   stage: Collections
+  extends: .standalone
   script:
     - ansible-galaxy collection list | grep google.cloud
-  variables:
-    GIT_STRATEGY: none
 
 Docker: 
   stage: Collections
@@ -137,5 +122,6 @@ Git:
 
 Passlib:
   stage: Python Modules
+  extends: .standalone
   script:
     - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('passlib') else 1)"
