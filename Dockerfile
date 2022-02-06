@@ -18,6 +18,5 @@ RUN xargs -a /apk_packages apk add --no-cache --update \
          /var/cache/* 
 USER ansible
 WORKDIR /etc/ansible
-VOLUME ["/etc/ansible"]
 HEALTHCHECK CMD ansible --version || exit 1
 ENTRYPOINT ["/bin/sh", "-c", "sleep infinity"]
