@@ -5,11 +5,9 @@ Le projet **ansible** permet la génération d'un conteneur Ansible basé sur un
 ---
 
 - [Informations générales](#informations-générales)
-- [Utilisation](#utilisation)
 - [Liste des fichiers](#liste-des-fichiers)
 - [Mise à jour](#mise-à-jour)
 - [Collections](#collections)
-- [Entrypoint](#entrypoint)
 
 ---
 
@@ -18,17 +16,8 @@ Le projet **ansible** permet la génération d'un conteneur Ansible basé sur un
 | Système d'exploitation / Logiciel | Version |
 | ------ | ------ |
 | Alpine Linux | 3.15 |
-| Ansible Base | 2.10.16 |
-| Ansible Lint | 5.3.1 |
-
-
-## Utilisation  
-
-Sur admintools, PAS en root  
-
-```
-dransible
-```
+| Ansible Base | 2.10.17 |
+| Ansible Lint | 5.3.2 |
 
 ## Liste des fichiers
 
@@ -37,12 +26,9 @@ dransible
 | Dockerfile | Recette de création du conteneur |
 | .gitlab-ci.yml | Instruction CI/CD |
 | README.md | Description du projet |
-| entrypoint.py | Script exécuté au lancement du conteneur |
-| internal.crt | Autorité de certification |
 | apk_packages | Liste des paquets APK à installer |
 | pip_packages | Liste des paquets PIP à installer |
 | ansible_collections | Liste des collections ANSIBLE à installer |
-| ansible.cfg | Fichier de configuration ANSIBLE |
 | .pylintrc | Règles du linteur Python |
 
 ## Mise à jour
@@ -73,20 +59,3 @@ Les collections suivantes sont installées dans le conteneur :
 - community.mongodb (https://docs.ansible.com/ansible/latest/collections/community/mongodb/index.html)
 
 Elles sont renseignées dans le fichier **ansible_collections**.
-
-## Entrypoint
-
-```bash
-usage: entrypoint.py [-h] [--url URL] [--username USERNAME]
-                     [--password PASSWORD] [--directory DIRECTORY]
-                     [--shell SHELL] [--branch BRANCH]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --url URL             Git HTTP(S) Repository URL
-  --username USERNAME   Git Username
-  --password PASSWORD   Git Password
-  --directory DIRECTORY Git Repository Directory
-  --shell SHELL         Unix Shell
-  --branch BRANCH       Git Clone Branch
-``` 
