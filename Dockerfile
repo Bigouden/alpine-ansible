@@ -1,7 +1,6 @@
 FROM alpine:3.16
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 COPY apk_packages /
-COPY entrypoint.py /
 COPY pip_packages /
 COPY ansible_collections /
 RUN xargs -a /apk_packages apk add --no-cache --update \
