@@ -18,6 +18,7 @@ stages:
   - Python Modules
   - Inspect
   - Release
+  - Clean
 
 Ansible:
   stage: Commands
