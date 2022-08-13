@@ -16,8 +16,8 @@ Le projet **ansible** permet la génération d'un conteneur Ansible basé sur un
 | Système d'exploitation / Logiciel | Version |
 | ------ | ------ |
 | Alpine Linux | 3.16 |
-| Ansible Base | 2.10.17 |
-| Ansible Lint | 6.2.1 |
+| Ansible Core | 2.13.2 |
+| Ansible Lint | 6.4.0 |
 
 ## Liste des fichiers
 
@@ -33,11 +33,11 @@ Le projet **ansible** permet la génération d'un conteneur Ansible basé sur un
 
 ## Mise à jour
 
-Les logiciels **Ansible Base** et **Ansible Lint** étant installés depuis les dépôts PIP, il faut régulièrement les mettre à jour.
+Les logiciels **Ansible Core** et **Ansible Lint** étant installés depuis les dépôts PIP, il faut régulièrement les mettre à jour.
 
 La liste des versions est disponible ici :
 
-- Ansible Base : https://pypi.org/project/ansible-base/#history
+- Ansible Core : https://pypi.org/project/ansible-core/#history
 - Ansible Lint : https://pypi.org/project/ansible-lint/#history
 
 Lorsqu'une nouvelle version sort, il faut mettre à jour les versions dans le fichier **pip_packages**.
