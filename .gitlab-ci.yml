@@ -122,6 +122,12 @@ Git:
   script:
     - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('git') else 1)"
 
+Git:
+  stage: Python Modules
+  extends: .standalone
+  script:
+    - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('gitlab') else 1)"
+
 Passlib:
   stage: Python Modules
   extends: .standalone
