@@ -4,3 +4,4 @@ dnspython
 GitPython
 jmespath
 passlib
+python-gitlab
