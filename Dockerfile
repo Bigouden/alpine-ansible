@@ -1,5 +1,6 @@
 FROM alpine:3.16
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
+ENV ANSIBLE_FORCE_COLOR=true
 COPY apk_packages /
 COPY pip_packages /
 COPY ansible_collections /
