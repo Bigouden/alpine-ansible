@@ -140,5 +140,7 @@ Build ansible-home:
   trigger:
     project: $CI_PROJECT_NAMESPACE/ansible-home
     branch: $CI_DEFAULT_BRANCH
+  inherit:
+    variables: false
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
