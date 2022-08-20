@@ -12,6 +12,7 @@ py3-netifaces
 py3-ruamel.yaml.clib
 py3-yaml
 rsync
+shadow
 sshpass
 tmux
 tree
