@@ -15,5 +15,6 @@ rsync
 sshpass
 tmux
 tree
+shadow
 vim
 vimdiff
