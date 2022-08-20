@@ -16,5 +16,6 @@ shadow
 sshpass
 tmux
 tree
+shadow
 vim
 vimdiff
