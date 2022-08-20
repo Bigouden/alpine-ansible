@@ -1,4 +1,4 @@
-NAFROM alpine:3.16
+FROM alpine:3.16
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
 ENV USERNAME="ansible"
