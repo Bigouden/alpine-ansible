@@ -11,7 +11,7 @@ RUN xargs -a /apk_packages apk add --no-cache --update \
     && pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r pip_packages \
     && xargs -a /ansible_collections ansible-galaxy collection install -p /usr/share/ansible/collections \
-    && useradd -u ${UID} -U -s /bin/bash ${USER} \
+    && useradd -l -u ${UID} -U -s /bin/bash ${USER} \
     && mkdir /home/${USER} \
     && chown -R ${USER}:${USER} /home/${USER} \
     && pip uninstall -y pip \
