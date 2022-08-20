@@ -141,4 +141,4 @@ Build ansible-home:
     project: $CI_PROJECT_NAMESPACE/ansible-home
     branch: $CI_DEFAULT_BRANCH
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"'
