@@ -1,5 +1,5 @@
 ansible-core==2.13.3
-ansible-lint==6.5.1
+ansible-lint==6.5.2
 dnspython
 GitPython
 jmespath
