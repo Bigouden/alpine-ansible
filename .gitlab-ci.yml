@@ -12,8 +12,8 @@ include:
     
 stages:
   - Quality
-  - Build
   - Security
+  - Build
   - Commands
   - Collections
   - Python Modules
