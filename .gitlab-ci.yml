@@ -58,6 +58,12 @@ Git CLI:
   script:
     - git version
 
+Git Filter Repo CLI:
+  stage: Commands
+  extends: .standalone
+  script:
+    - git-filter-repo --version
+
 Netcommon: 
   stage: Collections
   extends: .standalone
