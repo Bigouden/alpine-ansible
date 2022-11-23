@@ -1,5 +1,5 @@
 ansible-core==2.14.0
-ansible-lint==6.8.6
+ansible-lint==6.8.7
 dnspython
 GitPython
 git-filter-repo
