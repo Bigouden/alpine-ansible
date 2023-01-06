@@ -3,7 +3,6 @@ LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
 ENV USERNAME="ansible"
 ENV UID="1000"
-ENV GID="1000"
 COPY apk_packages /
 COPY pip_packages /
 COPY ansible_collections /
