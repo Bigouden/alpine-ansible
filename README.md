@@ -59,3 +59,60 @@ Les collections suivantes sont installées dans le conteneur :
 - community.mongodb (https://docs.ansible.com/ansible/latest/collections/community/mongodb/index.html)
 
 Elles sont renseignées dans le fichier **ansible_collections**.
+
+## Exporter Prometheus
+
+Le point d'entrée du conteneur agit maintenant comme un exporter prometheus fournissant les versions :
+
+- ansible_core
+- ansible_lint
+- ansible_collection
+
+Par défaut l'exporter est en écoute sur le port 8123 (surcharge possible à partir de la variable d'environnement : ANSIBLE_EXPORTER_PORT)
+
+### Exemple de métriques :
+
+```bash
+# HELP ansible_core Ansible Core Information
+# TYPE ansible_core gauge
+ansible_core{job="ansible-exporter",version="2.14.1"} 1.0
+# HELP ansible_lint Ansible Lint Information
+# TYPE ansible_lint gauge
+ansible_lint{job="ansible-exporter",version="6.10.2"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="ansible.posix",version="1.4.0"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="ansible.netcommon",version="4.1.0"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="ansible.utils",version="2.8.0"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="community.kubernetes",version="2.0.1"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="community.mongodb",version="1.4.2"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="community.postgresql",version="2.3.2"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="community.docker",version="3.3.2"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="community.crypto",version="2.10.0"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="community.general",version="6.2.0"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="kubernetes.core",version="2.3.2"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="google.cloud",version="1.1.2"} 1.0
+# HELP ansible_collection Ansible Collection Information
+# TYPE ansible_collection gauge
+ansible_collection{job="ansible-exporter",name="openstack.cloud",version="1.10.0"} 1.0
+```
