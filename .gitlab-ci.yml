@@ -19,6 +19,7 @@ stages:
   - Commands
   - Collections
   - Python Modules
+  - Test
   - Inspect
   - Release
   - Clean
