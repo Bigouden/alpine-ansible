@@ -6,3 +6,10 @@ git-filter-repo
 jmespath
 passlib
 python-gitlab
+certifi
+chardet
+idna
+prometheus_client
+pytz
+requests
+urllib3

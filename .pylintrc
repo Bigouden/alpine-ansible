@@ -1,2 +1,3 @@
 [MESSAGES CONTROL]
-disable=import-error,too-many-boolean-expressions,invalid-name,too-many-branches
+disable=import-error,protected-access,unused-variable
+
