@@ -6,7 +6,6 @@ git-filter-repo
 jmespath
 passlib
 python-gitlab
-py3-mysqlclient
 certifi
 chardet
 idna
@@ -14,3 +13,4 @@ prometheus_client
 pytz
 requests
 urllib3
+mysqlclient
