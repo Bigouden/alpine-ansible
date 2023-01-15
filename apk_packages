@@ -5,11 +5,11 @@ git
 jq
 less
 openssh-client
-mariadb-dev
 mysql-client
 py3-pip
 py3-bcrypt
 py3-cffi
+py3-mysqlclient
 py3-netifaces
 py3-ruamel.yaml.clib
 py3-yaml
