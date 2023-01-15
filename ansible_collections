@@ -5,6 +5,7 @@ community.docker
 community.general
 community.kubernetes
 community.mongodb
+community.mysql
 community.postgresql
 google.cloud
 openstack.cloud
