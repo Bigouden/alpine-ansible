@@ -4,6 +4,7 @@ git
 git
 jq
 less
+mariadb-dev
 openssh-client
 py3-pip
 py3-bcrypt
