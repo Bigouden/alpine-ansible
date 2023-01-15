@@ -145,6 +145,12 @@ Python Gitlab:
   script:
     - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('gitlab') else 1)"
 
+Python MySQL:
+  stage: Python Modules
+  extends: .standalone
+  script:
+    - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('MySQLdb') else 1)"
+
 Python Passlib:
   stage: Python Modules
   extends: .standalone
