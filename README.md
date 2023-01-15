@@ -57,6 +57,7 @@ Les collections suivantes sont installées dans le conteneur :
 - ansible.netcommon (https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/index.html)
 - community.postgresql (https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_db_module.html)
 - community.mongodb (https://docs.ansible.com/ansible/latest/collections/community/mongodb/index.html)
+- community.mysql (https://docs.ansible.com/ansible/latest/collections/community/mysql/index.html)
 
 Elles sont renseignées dans le fichier **ansible_collections**.
 

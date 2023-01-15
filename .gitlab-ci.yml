@@ -121,6 +121,12 @@ Mongodb:
   script:
     - ansible-galaxy collection list | grep community.mongodb
 
+MySQL: 
+  stage: Collections
+  extends: .standalone
+  script:
+    - ansible-galaxy collection list | grep community.mysql
+
 Python Bcrypt:
   stage: Python Modules
   extends: .standalone
