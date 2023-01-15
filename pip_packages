@@ -13,4 +13,3 @@ prometheus_client
 pytz
 requests
 urllib3
-mysqlclient
