@@ -5,6 +5,7 @@ git
 jq
 less
 openssh-client
+mariadb-dev
 mysql-client
 py3-pip
 py3-bcrypt
