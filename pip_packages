@@ -4,6 +4,7 @@ dnspython
 GitPython
 git-filter-repo
 jmespath
+mysqlclient
 passlib
 python-gitlab
 certifi
