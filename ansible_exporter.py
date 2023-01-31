@@ -89,7 +89,7 @@ CLIARGS = {'version': None,
            'collections_path': (ANSIBLE_COLLECTIONS_PATHS,),
            'collection': None,
            'output_format': 'json',
-           'validate_certs': None
+           'resolved_validate_certs': None
           }
 
 class AnsibleCollector():
