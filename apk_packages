@@ -7,7 +7,6 @@ less
 mariadb-dev
 openssh-client
 mysql-client
-py3-pip
 py3-bcrypt
 py3-cffi
 py3-mysqlclient
