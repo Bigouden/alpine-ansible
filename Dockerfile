@@ -9,9 +9,11 @@ ENV SCRIPT='ansible_exporter.py'
 ENV USERNAME="ansible"
 ENV UID="1000"
 COPY apk_packages /
+ADD https://bootstrap.pypa.io/get-pip.py /
 COPY pip_packages /
 COPY ansible_collections /
 RUN xargs -a /apk_packages apk add --no-cache --update \
+    && python get-pip.py \
     && pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r pip_packages \
     && xargs -a /ansible_collections ansible-galaxy collection install -p ${ANSIBLE_COLLECTIONS_PATHS} \
