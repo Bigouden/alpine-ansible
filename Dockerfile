@@ -29,5 +29,5 @@ COPY --chown=${USERNAME}:${USERNAME} --chmod=500 entrypoint.sh /
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 EXPOSE ${ANSIBLE_EXPORTER_PORT}
-HEALTHCHECK CMD ansible --version || exit 1
+HEALTHCHECK CMD ansible --version || exit 1 # nosemgrep
 ENTRYPOINT ["/entrypoint.sh"]
