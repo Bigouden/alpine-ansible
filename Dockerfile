@@ -14,7 +14,6 @@ COPY pip_packages /
 COPY ansible_collections /
 RUN xargs -a /apk_packages apk add --no-cache --update \
     && python get-pip.py \
-    && pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r pip_packages \
     && xargs -a /ansible_collections ansible-galaxy collection install -p ${ANSIBLE_COLLECTIONS_PATHS} \
     && useradd -l -u ${UID} -U -s /bin/bash -m ${USERNAME} \
