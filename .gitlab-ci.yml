@@ -1,8 +1,9 @@
+---
 include:
-  - project: 'Bigouden/gitlab-ci-templates'
-    file: '.gitlab-ci-docker.yml'
-  - project: 'Bigouden/gitlab-ci-templates'
-    file: '.gitlab-ci-prometheus.yml'
+  - project: "Bigouden/gitlab-ci-templates"
+    file: ".gitlab-ci-docker.yml"
+  - project: "Bigouden/gitlab-ci-templates"
+    file: ".gitlab-ci-prometheus.yml"
 
 .standalone:
   image:
@@ -10,8 +11,8 @@ include:
     entrypoint: [""]
   variables:
     GIT_STRATEGY: none
-  dependencies: []  
-    
+  dependencies: []
+
 stages:
   - Quality
   - Security
@@ -31,25 +32,25 @@ Ansible:
   script:
     - ansible --version
 
-Ansible Galaxy: 
+Ansible Galaxy:
   stage: Commands
   extends: .standalone
   script:
     - ansible-galaxy --version
 
-Ansible Lint: 
+Ansible Lint:
   stage: Commands
   extends: .standalone
   script:
     - ansible-lint --version
 
-Ansible Playbook: 
+Ansible Playbook:
   stage: Commands
   extends: .standalone
   script:
     - ansible-playbook --version
 
-Ansible Vault: 
+Ansible Vault:
   stage: Commands
   extends: .standalone
   script:
@@ -67,61 +68,61 @@ Git Filter Repo CLI:
   script:
     - git-filter-repo --version
 
-Netcommon: 
+Netcommon:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep ansible.netcommon
 
-Posix: 
+Posix:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep ansible.posix
 
-Crypto: 
+Crypto:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.crypto
 
-General: 
+General:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.general
 
-Kubernetes: 
+Kubernetes:
   stage: Collections
   extends: .standalone
   script:
-    - ansible-galaxy collection list | grep community.kubernetes
+    - ansible-galaxy collection list | grep kubernetes.core
 
-Cloud: 
+Cloud:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep google.cloud
 
-Docker: 
+Docker:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.docker
 
-Postgresql: 
+Postgresql:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.postgresql
 
-Mongodb: 
+Mongodb:
   stage: Collections
   extends: .standalone
   script:
     - ansible-galaxy collection list | grep community.mongodb
 
-MySQL: 
+MySQL:
   stage: Collections
   extends: .standalone
   script:
