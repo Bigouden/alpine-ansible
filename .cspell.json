@@ -1,0 +1,36 @@
+{
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/vscode-extension/**",
+    "**/.git/**",
+    "**/.pnpm-lock.json",
+    ".vscode",
+    "package-lock.json",
+    "megalinter-reports"
+  ],
+  "allowCompoundWords": true,
+  "version": "0.2",
+  "language": "en,fr",
+  "caseSensitive": false,
+  "languageSettings": [
+    {
+      "languageId": "*",
+      "caseSensitive": false
+    }
+  ],
+  "words": [
+    "GUIRRIEC",
+    "Posix",
+    "certifi",
+    "cffi",
+    "chardet",
+    "clib",
+    "idna",
+    "jmespath",
+    "netifaces",
+    "nosemgrep",
+    "posix",
+    "pylintrc",
+    "pytz"
+  ]
+}
