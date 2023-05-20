@@ -15,9 +15,9 @@ Le projet **ansible** permet la génération d'un conteneur Ansible basé sur un
 
 | Système d'exploitation / Logiciel | Version |
 |-----------------------------------|---------|
-| Alpine Linux                      | 3.17    |
-| Ansible Core                      | 2.14.4  |
-| Ansible Lint                      | 6.15.0  |
+| Alpine Linux                      | 3.18    |
+| Ansible Core                      | 2.15.0  |
+| Ansible Lint                      | 6.16.1  |
 
 ## Liste des fichiers
 
