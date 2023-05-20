@@ -9,6 +9,7 @@ import logging
 import os
 import sys
 import time
+import warnings
 from datetime import datetime
 from io import StringIO
 
@@ -16,9 +17,13 @@ import ansible.cli.galaxy
 import pytz
 from ansible import __version__ as ansible_core_version
 from ansible import context as ansible_context
+from ansible.plugins.loader import init_plugin_loader
 from ansiblelint import __version__ as ansible_lint_version
 from prometheus_client import PLATFORM_COLLECTOR, PROCESS_COLLECTOR, start_http_server
 from prometheus_client.core import REGISTRY, Metric
+
+# Ignore Ansible Warning
+warnings.filterwarnings("ignore")
 
 ANSIBLE_EXPORTER_NAME = os.environ.get("ANSIBLE_EXPORTER_NAME", "ansible-exporter")
 ANSIBLE_EXPORTER_LOGLEVEL = os.environ.get("ANSIBLE_EXPORTER_LOGLEVEL", "INFO").upper()
@@ -105,7 +110,7 @@ CLIARGS = {
     "api_key": None,
     "ignore_certs": None,
     "timeout": None,
-    "collections_path": (ANSIBLE_COLLECTIONS_PATHS,),
+    "collections_path": None,
     "collection": None,
     "output_format": "json",
     "resolved_validate_certs": None,
@@ -130,6 +135,7 @@ class AnsibleCollector:
     def get_ansible_collections(self):
         """Retrieve Ansible Collections Informations"""
         collections = []
+        init_plugin_loader()
         ansible_galaxy = ansible.cli.galaxy.GalaxyCLI(ARGS)
         ansible_context.CLIARGS = CLIARGS
         ansible_buffer = StringIO()

@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.18
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
 ENV ANSIBLE_COLLECTIONS_PATHS="/usr/share/ansible/collections"
@@ -9,6 +9,7 @@ ENV SCRIPT='ansible_exporter.py'
 ENV USERNAME="ansible"
 ENV UID="1000"
 COPY apk_packages /
+#checkov:skip=CKV_DOCKER_4
 ADD https://bootstrap.pypa.io/get-pip.py /
 COPY pip_packages /
 COPY ansible_collections /
