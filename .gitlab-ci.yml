@@ -158,6 +158,12 @@ Python Passlib:
   script:
     - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('passlib') else 1)"
 
+Python Pip:
+  stage: Python Modules
+  extends: .standalone
+  script:
+    - python3 -c "import sys, pkgutil; sys.exit(0 if pkgutil.find_loader('pip') else 1)"
+
 Build ansible-home:
   stage: Trigger
   trigger:
