@@ -8,15 +8,13 @@ ENV ANSIBLE_EXPORTER_NAME='ansible-exporter'
 ENV SCRIPT='ansible_exporter.py'
 ENV USERNAME="ansible"
 ENV UID="1000"
-COPY apk_packages /
+COPY apk_packages pip_packages ansible_collections /tmp/
 #checkov:skip=CKV_DOCKER_4
-ADD https://bootstrap.pypa.io/get-pip.py /
-COPY pip_packages /
-COPY ansible_collections /
-RUN xargs -a /apk_packages apk add --no-cache --update \
-    && python get-pip.py \
-    && pip install --no-cache-dir -r pip_packages \
-    && xargs -a /ansible_collections ansible-galaxy collection install -p ${ANSIBLE_COLLECTIONS_PATHS} \
+ADD https://bootstrap.pypa.io/get-pip.py /tmp
+RUN xargs -a /tmp/apk_packages apk add --no-cache --update \
+    && python /tmp/get-pip.py \
+    && pip install --no-cache-dir -r /tmp/pip_packages \
+    && xargs -a /tmp/ansible_collections ansible-galaxy collection install -p ${ANSIBLE_COLLECTIONS_PATHS} \
     && useradd -l -u ${UID} -U -s /bin/bash -m ${USERNAME} \
     && rm -rf \
          /root/.ansible \
