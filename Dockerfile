@@ -28,7 +28,7 @@ RUN --mount=type=bind,from=builder,source=/usr/bin/envsubst,target=/usr/bin/envs
     --mount=type=cache,id=apk_cache,target=/var/cache/apk \
     --mount=type=cache,id=pip_cache,target=/root/.cache \
     --mount=type=cache,id=collections_cache,target=/root/.ansible \
-    apk add --update `envsubst < /tmp/apk_packages` \
+    apk --update add `envsubst < /tmp/apk_packages` \
     && python /tmp/get-pip.py \
     && pip install `envsubst < /tmp/pip_packages` \
     && ansible-galaxy collection install `envsubst < /tmp/ansible_collections` -p "${ANSIBLE_COLLECTIONS_PATHS}" \
