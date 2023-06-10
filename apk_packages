@@ -1,9 +1,6 @@
-busybox-extras
 curl
 git
-git
 jq
-less
 mariadb-dev
 openssh-client
 mysql-client
@@ -17,7 +14,4 @@ rsync
 shadow
 sshpass
 tmux
-tree
 shadow
-vim
-vimdiff
