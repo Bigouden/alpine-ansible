@@ -5,6 +5,7 @@ GitPython
 git-filter-repo
 jmespath
 passlib
+PyGithub
 python-gitlab
 pytz
 prometheus_client
