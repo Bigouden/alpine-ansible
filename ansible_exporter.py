@@ -8,10 +8,13 @@ import json
 import logging
 import os
 import sys
+import threading
 import time
 import warnings
 from datetime import datetime
 from io import StringIO
+from typing import Callable
+from wsgiref.simple_server import make_server
 
 import ansible.cli.galaxy
 import pytz
@@ -19,8 +22,9 @@ from ansible import __version__ as ansible_core_version
 from ansible import context as ansible_context
 from ansible.plugins.loader import init_plugin_loader
 from ansiblelint import __version__ as ansible_lint_version
-from prometheus_client import PLATFORM_COLLECTOR, PROCESS_COLLECTOR, start_http_server
-from prometheus_client.core import REGISTRY, Metric
+from prometheus_client import PLATFORM_COLLECTOR, PROCESS_COLLECTOR
+from prometheus_client.core import REGISTRY, CollectorRegistry, Metric
+from prometheus_client.exposition import _bake_output, parse_qs
 
 # Ignore Ansible Warning
 warnings.filterwarnings("ignore")
@@ -28,6 +32,64 @@ warnings.filterwarnings("ignore")
 ANSIBLE_EXPORTER_NAME = os.environ.get("ANSIBLE_EXPORTER_NAME", "ansible-exporter")
 ANSIBLE_EXPORTER_LOGLEVEL = os.environ.get("ANSIBLE_EXPORTER_LOGLEVEL", "INFO").upper()
 ANSIBLE_EXPORTER_TZ = os.environ.get("TZ", "Europe/Paris")
+
+
+def make_wsgi_app(
+    registry: CollectorRegistry = REGISTRY, disable_compression: bool = False
+) -> Callable:
+    """Create a WSGI app which serves the metrics from a registry."""
+
+    def prometheus_app(environ, start_response):
+        # Prepare parameters
+        accept_header = environ.get("HTTP_ACCEPT")
+        accept_encoding_header = environ.get("HTTP_ACCEPT_ENCODING")
+        params = parse_qs(environ.get("QUERY_STRING", ""))
+        headers = [
+            ("Server", ""),
+            ("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0"),
+            ("Pragma", "no-cache"),
+            ("Expires", "0"),
+            ("X-Content-Type-Options", "nosniff"),
+        ]
+        if environ["PATH_INFO"] == "/":
+            status = "301 Moved Permanently"
+            headers.append(("Location", "/metrics"))
+            output = b""
+        elif environ["PATH_INFO"] == "/favicon.ico":
+            status = "200 OK"
+            output = b""
+        elif environ["PATH_INFO"] == "/metrics":
+            status, tmp_headers, output = _bake_output(
+                registry,
+                accept_header,
+                accept_encoding_header,
+                params,
+                disable_compression,
+            )
+            headers += tmp_headers
+        else:
+            status = "404 Not Found"
+            output = b""
+        start_response(status, headers)
+        return [output]
+
+    return prometheus_app
+
+
+def start_wsgi_server(
+    port: int,
+    addr: str = "0.0.0.0",  # nosec B104
+    registry: CollectorRegistry = REGISTRY,
+) -> None:
+    """Starts a WSGI server for prometheus metrics as a daemon thread."""
+    app = make_wsgi_app(registry)
+    httpd = make_server(addr, port, app)
+    thread = threading.Thread(target=httpd.serve_forever)
+    thread.daemon = True
+    thread.start()
+
+
+start_http_server = start_wsgi_server
 
 # Logging Configuration
 try:
