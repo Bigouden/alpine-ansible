@@ -10,8 +10,8 @@ RUN --mount=type=cache,id=builder_apk_cache,target=/var/cache/apk \
     apk add gettext-envsubst
 
 FROM alpine:${ALPINE_VERSION}
-ENV ANSIBLE_CORE_VERSION="2.15.5"
-ENV ANSIBLE_LINT_VERSION="6.21.1"
+ENV ANSIBLE_CORE_VERSION="2.16.0"
+ENV ANSIBLE_LINT_VERSION="6.22.0"
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
 ENV ANSIBLE_COLLECTIONS_PATHS="/usr/share/ansible/collections"
