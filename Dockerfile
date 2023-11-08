@@ -2,7 +2,7 @@
 ARG ALPINE_VERSION="3.18"
 
 FROM alpine:${ALPINE_VERSION} AS builder
-COPY apk_packages pip_packages ansible_collections /tmp/
+COPY --link apk_packages pip_packages ansible_collections /tmp/
 # checkov:skip=CKV_DOCKER_4
 ADD https://bootstrap.pypa.io/get-pip.py /tmp
 # hadolint ignore=DL3018
@@ -14,7 +14,7 @@ ENV ANSIBLE_CORE_VERSION="2.16.0"
 ENV ANSIBLE_LINT_VERSION="6.22.0"
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
-ENV ANSIBLE_COLLECTIONS_PATHS="/usr/share/ansible/collections"
+ENV ANSIBLE_COLLECTIONS_PATH="/usr/share/ansible/collections"
 ENV ANSIBLE_EXPORTER_PORT=8123
 ENV ANSIBLE_EXPORTER_LOGLEVEL='INFO'
 ENV ANSIBLE_EXPORTER_NAME='ansible-exporter'
@@ -31,9 +31,9 @@ RUN --mount=type=bind,from=builder,source=/usr/bin/envsubst,target=/usr/bin/envs
     apk --update add `envsubst < /tmp/apk_packages` \
     && python /tmp/get-pip.py \
     && pip install `envsubst < /tmp/pip_packages` \
-    && ansible-galaxy collection install `envsubst < /tmp/ansible_collections` -p "${ANSIBLE_COLLECTIONS_PATHS}" \
+    && ansible-galaxy collection install `envsubst < /tmp/ansible_collections` -p "${ANSIBLE_COLLECTIONS_PATH}" \
     && useradd -l -u "${UID}" -U -s /bin/bash -m "${USERNAME}"
-COPY --chmod=755 ${SCRIPT} entrypoint.sh /
+COPY --link --chmod=755 ${SCRIPT} entrypoint.sh /
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 EXPOSE ${ANSIBLE_EXPORTER_PORT}
