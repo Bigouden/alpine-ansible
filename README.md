@@ -17,7 +17,7 @@ Le projet **ansible** permet la génération d'un conteneur Ansible basé sur un
 |-----------------------------------|---------|
 | Alpine Linux                      | 3.18    |
 | Ansible Core                      | 2.16.0  |
-| Ansible Lint                      | 6.22.0  |
+| Ansible Lint                      | 6.22.1  |
 
 ## Liste des fichiers
 
