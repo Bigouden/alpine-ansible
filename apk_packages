@@ -4,7 +4,6 @@ jq
 mariadb-dev
 openssh-client
 mysql-client
-pipx
 py3-bcrypt
 py3-cffi
 py3-mysqlclient
