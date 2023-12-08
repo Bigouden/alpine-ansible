@@ -9,3 +9,9 @@ PyGithub
 python-gitlab
 pytz
 prometheus_client
+bcrypt
+cffi
+mysqlclient
+netifaces
+ruamel.yaml.clib
+PyYAML

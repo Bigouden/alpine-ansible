@@ -1,3 +1,4 @@
 #!/bin/sh
 # shellcheck source=/dev/null
-python3 "/${SCRIPT}"
+. "${VIRTUAL_ENV}"/bin/activate
+python3 "${VIRTUAL_ENV}/${SCRIPT}"

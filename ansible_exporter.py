@@ -24,7 +24,7 @@ from ansible.plugins.loader import init_plugin_loader
 from ansiblelint import __version__ as ansible_lint_version
 from prometheus_client import PLATFORM_COLLECTOR, PROCESS_COLLECTOR
 from prometheus_client.core import REGISTRY, CollectorRegistry, Metric
-from prometheus_client.exposition import _bake_output, parse_qs
+from prometheus_client.exposition import _bake_output, _SilentHandler, parse_qs
 
 # Ignore Ansible Warning
 warnings.filterwarnings("ignore")
@@ -83,7 +83,7 @@ def start_wsgi_server(
 ) -> None:
     """Starts a WSGI server for prometheus metrics as a daemon thread."""
     app = make_wsgi_app(registry)
-    httpd = make_server(addr, port, app)
+    httpd = make_server(addr, port, app, handler_class=_SilentHandler)
     thread = threading.Thread(target=httpd.serve_forever)
     thread.daemon = True
     thread.start()
