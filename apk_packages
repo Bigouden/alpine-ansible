@@ -3,13 +3,8 @@ git
 jq
 mariadb-dev
 openssh-client
+python3
 mysql-client
-py3-bcrypt
-py3-cffi
-py3-mysqlclient
-py3-netifaces
-py3-ruamel.yaml.clib
-py3-yaml
 rsync
 shadow
 sshpass
