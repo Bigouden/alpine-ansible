@@ -4,13 +4,12 @@ ARG ALPINE_VERSION="3.19"
 FROM alpine:${ALPINE_VERSION} AS builder
 COPY --link apk_build_packages apk_packages pip_packages ansible_collections /tmp/
 # checkov:skip=CKV_DOCKER_4
-ADD https://bootstrap.pypa.io/get-pip.py /tmp
 # hadolint ignore=DL3018
 RUN --mount=type=cache,id=builder_apk_cache,target=/var/cache/apk \
     apk add gettext-envsubst
 
 FROM alpine:${ALPINE_VERSION}
-ENV ANSIBLE_CORE_VERSION="2.16.1"
+ENV ANSIBLE_CORE_VERSION="2.16.2"
 ENV ANSIBLE_LINT_VERSION="6.22.1"
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
