@@ -9,7 +9,7 @@ RUN --mount=type=cache,id=builder_apk_cache,target=/var/cache/apk \
     apk add gettext-envsubst
 
 FROM alpine:${ALPINE_VERSION}
-ENV ANSIBLE_CORE_VERSION="2.16.5"
+ENV ANSIBLE_CORE_VERSION="2.16.6"
 ENV ANSIBLE_LINT_VERSION="24.2.2"
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
