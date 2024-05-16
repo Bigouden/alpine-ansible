@@ -10,7 +10,7 @@ RUN --mount=type=cache,id=builder_apk_cache,target=/var/cache/apk \
 
 FROM alpine:${ALPINE_VERSION}
 ENV ANSIBLE_CORE_VERSION="2.16.6"
-ENV ANSIBLE_LINT_VERSION="24.2.3"
+ENV ANSIBLE_LINT_VERSION="24.5.0"
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
 ENV ANSIBLE_COLLECTIONS_PATH="/usr/share/ansible/collections"
