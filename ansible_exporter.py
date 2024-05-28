@@ -26,6 +26,9 @@ from prometheus_client import PLATFORM_COLLECTOR, PROCESS_COLLECTOR
 from prometheus_client.core import REGISTRY, CollectorRegistry, Metric
 from prometheus_client.exposition import _bake_output, _SilentHandler, parse_qs
 
+LOGFMT = "%(asctime)s - %(levelname)s - %(message)s"
+DATEFMT = "%d/%m/%Y %H:%M:%S"
+
 # Ignore Ansible Warning
 warnings.filterwarnings("ignore")
 
@@ -99,8 +102,8 @@ try:
     ).timetuple()
     logging.basicConfig(
         stream=sys.stdout,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        datefmt="%d/%m/%Y %H:%M:%S",
+        format=LOGFMT,
+        datefmt=DATEFMT,
         level=ANSIBLE_EXPORTER_LOGLEVEL,
     )
 except pytz.exceptions.UnknownTimeZoneError:
@@ -109,8 +112,8 @@ except pytz.exceptions.UnknownTimeZoneError:
     ).timetuple()
     logging.basicConfig(
         stream=sys.stdout,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        datefmt="%d/%m/%Y %H:%M:%S",
+        format=LOGFMT,
+        datefmt=DATEFMT,
         level="INFO",
     )
     logging.error("TZ invalid : %s !", ANSIBLE_EXPORTER_TZ)
@@ -118,8 +121,8 @@ except pytz.exceptions.UnknownTimeZoneError:
 except ValueError:
     logging.basicConfig(
         stream=sys.stdout,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        datefmt="%d/%m/%Y %H:%M:%S",
+        format=LOGFMT,
+        datefmt=DATEFMT,
         level="INFO",
     )
     logging.error("ANSIBLE_EXPORTER_LOGLEVEL invalid !")
