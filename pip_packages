@@ -4,6 +4,7 @@ dnspython
 GitPython
 git-filter-repo
 jmespath
+netaddr
 passlib
 PyGithub
 python-gitlab
@@ -12,6 +13,5 @@ prometheus_client
 bcrypt
 cffi
 mysqlclient
-netifaces
 ruamel.yaml.clib
 PyYAML

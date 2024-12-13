@@ -1,4 +1,4 @@
-# kics-scan disable=ae9c56a6-3ed1-4ac0-9b54-31267f51151d,0008c003-79aa-42d8-95b8-1c2fe37dbfe6,4b410d24-1cbe-4430-a632-62c9a931cf1c,d3499f6d-1651-41bb-a9a7-de925fea487b,9513a694-aa0d-41d8-be61-3271e056f36b,f2f903fb-b977-461e-98d7-b3e2185c6118
+# kics-scan disable=ae9c56a6-3ed1-4ac0-9b54-31267f51151d,0008c003-79aa-42d8-95b8-1c2fe37dbfe6,4b410d24-1cbe-4430-a632-62c9a931cf1c,d3499f6d-1651-41bb-a9a7-de925fea487b,9513a694-aa0d-41d8-be61-3271e056f36b,f2f903fb-b977-461e-98d7-b3e2185c6118,02d9c71f-3ee8-4986-9c27-1a20d0d19bfc
 ARG ALPINE_VERSION="3.20"
 
 FROM alpine:${ALPINE_VERSION} AS builder
@@ -9,8 +9,8 @@ RUN --mount=type=cache,id=builder_apk_cache,target=/var/cache/apk \
     apk add gettext-envsubst
 
 FROM alpine:${ALPINE_VERSION}
-ENV ANSIBLE_CORE_VERSION="2.18.0"
-ENV ANSIBLE_LINT_VERSION="24.10.0"
+ENV ANSIBLE_CORE_VERSION="2.18.1"
+ENV ANSIBLE_LINT_VERSION="24.12.2"
 LABEL maintainer="Thomas GUIRRIEC <thomas@guirriec.fr>"
 ENV ANSIBLE_FORCE_COLOR=true
 ENV ANSIBLE_COLLECTIONS_PATH="/usr/share/ansible/collections"
