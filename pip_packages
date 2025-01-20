@@ -1,7 +1,7 @@
 ansible-core==${ANSIBLE_CORE_VERSION}
 ansible-lint==${ANSIBLE_LINT_VERSION}
-dnspython
-GitPython
+dnspython>=2.7.0
+gitpython>=3.1.44
 git-filter-repo
 jmespath
 netaddr
@@ -14,4 +14,4 @@ bcrypt
 cffi
 mysqlclient
 ruamel.yaml.clib
-PyYAML
+PyYAML>=5.4
